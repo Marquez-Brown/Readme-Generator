@@ -7,8 +7,8 @@ const generateMarkdown = require('./utils/generateMarkdown');
 // const questions = [];
 const writeFileAsync = util.promisify(fs.writeFile);
 
-const promptUser = () => {
-  return inquirer.prompt([
+const promptUser = () => 
+  inquirer.prompt([
     {
       type: 'input',
       message: 'what is the title of your project?',
@@ -45,40 +45,47 @@ const promptUser = () => {
       name: 'linkedin',
       
     },
+    {
+        type: 'input',
+        message: 'What license did you use?',
+        name: 'license',
+        
+      },
   ]);
-};
-const generateReadme = (answers) => 
-` #${answers.title}
 
-## Purpose
 
-${answers.purpose}
-
-## Usage
-
-${answers.usage}
-
-## Contributors 
-
-${answers.contributors}
-
-## Contact
-
-${answers.github}
-${answers.linkedin}
-
-##License
-${generateMarkdown.}
-`
 // TODO: Create a function to write README file
 // function writeToFile("README1.md", ) {}
+// const generateReadme = (answers) => 
+// `# ${answers.title}
 
+// ## Purpose
+
+// ${answers.purpose}
+
+// ## Usage
+
+// ${answers.usage}
+
+// ## Contributors 
+
+// ${answers.contributors}
+
+// ## Contact
+
+// ${answers.github}
+// ${answers.linkedin}
+
+// ##License
+// ${answers.license}
+
+// `;
 // TODO: Create a function to initialize app
 // function init() {}
 
 // Function call to initialize app;
 
 promptUser()
-.then((answers) => writeFileAsync('Readme1.md', generateReadme(answers)))
-.then(() => console.log('Successfully wrote to Readme1.md'))
+.then((answers) => writeFileAsync('readme.md', generateMarkdown(answers)))
+.then(() => console.log('Successfully wrote to readme.md'))
 .catch((err) => console.error(err));
